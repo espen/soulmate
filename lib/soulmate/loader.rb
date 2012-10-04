@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module Soulmate
 
   class Loader < Base
@@ -29,10 +31,10 @@ module Soulmate
     def add(item, opts = {})
       opts = { :skip_duplicate_check => false }.merge(opts)
       raise ArgumentError unless item["id"] && item["term"]
-      
+
       # kill any old items with this id
       remove("id" => item["id"]) unless opts[:skip_duplicate_check]
-      
+
       Soulmate.redis.pipelined do
         # store the raw data in a separate key to reduce memory usage
         Soulmate.redis.hset(database, item["id"], MultiJson.encode(item))

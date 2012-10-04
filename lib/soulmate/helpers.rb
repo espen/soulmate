@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module Soulmate
   module Helpers
 
